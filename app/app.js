@@ -1,3 +1,27 @@
 (function () {
-	// You app starts here
+	'use strict';
+
+	var app = angular.module('BlogApp', ['ngRoute']);
+
+	app.config(['$routeProvider' , function($routeProvider){
+		$routeProvider
+			.when('/', {
+				redirectTo : '/posts/:page?'
+			})
+			.when('/posts/:page?' , {
+				templateUrl : 'app/posts/posts.html',
+				controller : 'MainCtrl'
+			})
+			.when('/admin' , {
+				templateUrl : 'app/admin/admin.html',
+				controller : 'MainCtrl'
+			})
+			/*.when('/emplyoee/:employeeId' , {
+				templateUrl : 'components/employee/employee.html',
+				controller : 'EmployeeController'
+			})*/
+			.otherwise({
+				redirectTo : '/'
+			});
+	}]);
 }());
