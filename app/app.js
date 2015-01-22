@@ -16,10 +16,6 @@
 				templateUrl : 'app/admin/admin.html',
 				controller : 'MainCtrl'
 			})
-			/*.when('/emplyoee/:employeeId' , {
-				templateUrl : 'components/employee/employee.html',
-				controller : 'EmployeeController'
-			})*/
 			.otherwise({
 				redirectTo : '/'
 			});

@@ -1,0 +1,57 @@
+<h1 class="page-header">All Posts</h1>
+<section class="col-md-8" ng-repeat = "post in postsData | limitFrom:2">
+
+		<!-- Begin Post -->
+		<article>
+			<header>
+				<h2>
+					<a href="post.html">{{post.title}}</a>
+				</h2>
+
+				<p>
+					<small class="glyphicon glyphicon-user"></small>
+					by <a href="#">{{post.author}}</a>
+				</p>
+				<p>
+					<small class="glyphicon glyphicon-time"></small>
+					Posted on {{post.date | date : "dd MMM, yyyy"}}
+				</p>
+			</header>
+			<hr>
+
+			<figure>
+				<img class="img-responsive" src="{{post.image}}"
+					alt="">
+			</figure>
+			<hr>
+
+			<!-- Post Description -->
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur quis debitis suscipit assumenda unde possimus, culpa voluptatum ducimus delectus, recusandae fuga eaque porro nam fugiat vel, illo reiciendis corporis quae?</p>
+			<br>
+
+			<footer class="clearfix">
+				<p class="pull-left">
+					<b>Tags:&nbsp;</b>
+					<a href="#" class="label label-default" ng-repeat = "tag in post.tags">{{tag}}</a>
+					<!-- <a href="#" class="label label-default">AngularJS</a> -->
+				</p>
+
+				<a class="btn btn-primary pull-right" href="post.html">
+					Read More <i class="glyphicon glyphicon-chevron-right"></i>
+				</a>
+			</footer>
+		</article>
+		<hr>
+		<!-- End of Post -->
+</section>
+<section>
+		<!-- Pager -->
+		<ul class="pager">
+			<li class="previous">
+				<a href="#">&larr; Older</a>
+			</li>
+			<li class="next">
+				<a href="#">Newer &rarr;</a>
+			</li>
+		</ul>
+</section>
