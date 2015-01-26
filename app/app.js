@@ -10,7 +10,7 @@
 			})
 			.when('/posts/:page?' , {
 				templateUrl : 'app/posts/posts.html',
-				controller : 'MainCtrl'
+				controller : 'postCtrl'
 			})
 			.when('/admin' , {
 				templateUrl : 'app/admin/admin.html',

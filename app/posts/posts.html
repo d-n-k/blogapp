@@ -1,6 +1,5 @@
-<h1 class="page-header">All Posts</h1>
-<section class="col-md-8" ng-repeat = "post in postsData | limitFrom:2">
-
+<section ng-repeat = "post in postsData | limitFrom:0">
+	<h1 class="page-header">All Posts</h1>
 		<!-- Begin Post -->
 		<article>
 			<header>
@@ -20,7 +19,7 @@
 			<hr>
 
 			<figure>
-				<img class="img-responsive" src="{{post.image}}"
+				<img class="img-responsive" ng-src="{{post.image}}"
 					alt="">
 			</figure>
 			<hr>
@@ -32,7 +31,9 @@
 			<footer class="clearfix">
 				<p class="pull-left">
 					<b>Tags:&nbsp;</b>
-					<a href="#" class="label label-default" ng-repeat = "tag in post.tags">{{tag}}</a>
+					<span ng-repeat = "tag in post.tags">
+					<a href="#" class="label label-default">{{tag}}</a>
+					</span>
 					<!-- <a href="#" class="label label-default">AngularJS</a> -->
 				</p>
 
@@ -51,7 +52,7 @@
 				<a href="#">&larr; Older</a>
 			</li>
 			<li class="next">
-				<a href="#">Newer &rarr;</a>
+				<a href="#" ng-class="(fpage) ? 'show' : 'hide'">Newer &rarr;</a>
 			</li>
 		</ul>
 </section>
