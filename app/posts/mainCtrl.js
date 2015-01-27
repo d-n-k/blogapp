@@ -21,10 +21,11 @@
 				$scope.postsData = data.posts;
 				$scope.authors = findOccurences(data.posts, 'author');
 				$scope.rrr = findOccurences(data.posts, 'tags');
-				console.log($scope.help);
-				$scope.ttt = _.pluck($scope.rrr, 'key');
+				console.log($scope.rrr);
+				$scope.ttt = _.pluck(findOccurences(data.posts, 'tags'), 'key');
 				$scope.tags = _.union($scope.ttt[0].split(','), $scope.ttt[1].split(','), $scope.ttt[2].split(','));
-				console.log($scope.tags);
+				$scope.h = _.countBy($scope.rrr, {key: 'JavaScript'});
+				console.log($scope.h);
 			})
 			.error(function(data, status){
 

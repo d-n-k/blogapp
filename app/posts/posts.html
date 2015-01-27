@@ -1,4 +1,4 @@
-<section ng-repeat = "post in postsData | limitFrom:0">
+<section ng-repeat = "post in postsData | limitFrom: pFilter">
 	<h1 class="page-header">All Posts</h1>
 		<!-- Begin Post -->
 		<article>
@@ -49,10 +49,10 @@
 		<!-- Pager -->
 		<ul class="pager">
 			<li class="previous">
-				<a href="#">&larr; Older</a>
+				<a href="#/posts/{{currpage}}">&larr; Older</a>
 			</li>
 			<li class="next">
-				<a href="#" ng-class="(fpage) ? 'show' : 'hide'">Newer &rarr;</a>
+				<a href="#/posts/{{currpage-2}}" ng-class="(fpage) ? 'show' : 'hide'">Newer &rarr;</a>
 			</li>
 		</ul>
 </section>

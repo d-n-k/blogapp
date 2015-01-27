@@ -9,9 +9,35 @@
 		console.log($location.path());
 		console.log($location.search());
 
-		$scope.fpage = ($routeParams.page);
 		$scope.classActive = ($location.path().indexOf('posts')>-1);
 		console.log($scope.classActive);
+		var init = function() {
+			$scope.pFilter = 2;
+			$scope.currpage = 3;
+			$scope.fpage = $routeParams.page;
+			console.log($routeParams.page === "2");
+			if ($routeParams.page === '2') {
+				$scope.pFilter = 2;
+				$scope.currpage = 3;
+				$scope.fpage = undefined;
+			}
+			if ($routeParams.page > 2){
+				$scope.pFilter = $scope.pFilter + 3;
+				$scope.currpage = $scope.currpage + 1;
+			}
+			if ($routeParams.page === undefined) {
+				$scope.pFilter = 0;
+				$scope.currpage = 2;
+			}
+
+
+
+		};
+		init();
+
+		console.log($scope.pFilter);
+		console.log($scope.currpage);
+		console.log($scope.fpage);
 
 		// $scope.postsData = [];
 
