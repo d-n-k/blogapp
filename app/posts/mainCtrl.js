@@ -20,12 +20,12 @@
 			.success(function(data, status) {
 				$scope.postsData = data.posts;
 				$scope.authors = findOccurences(data.posts, 'author');
-				$scope.rrr = findOccurences(data.posts, 'tags');
-				console.log($scope.rrr);
 				$scope.ttt = _.pluck(findOccurences(data.posts, 'tags'), 'key');
 				$scope.tags = _.union($scope.ttt[0].split(','), $scope.ttt[1].split(','), $scope.ttt[2].split(','));
-				$scope.h = _.countBy($scope.rrr, {key: 'JavaScript'});
-				console.log($scope.h);
+				// console.log(countTags($scope.postsData,'JavaScript'));
+				console.log($scope.ttt);
+				$scope.tagsA = tagsArray($scope.tags);
+				console.log($scope.tagsA);
 			})
 			.error(function(data, status){
 
@@ -37,16 +37,26 @@
 			});
 
 		};
-		var split = function (arr) {
+		var countTags = function (arr, tag) {
+			var count = 0;
+			var tags = {};
 			for (var i = 0; i < arr.length; i++) {
-				var a = arr[i].split(',');
-				var b = _.union(a);
-				return b;
-
-
+				if(arr[i].tags.indexOf(tag)>-1) {
+					count ++;
+				}
 			}
-			return b;
+			return tags = { tag: tag, count: count};
 		};
+		var tagsArray = function (arr) {
+			var tagsArray = [];
+			for (var i = 0; i < arr.length; i++) {
+				countTags($scope.postsData,arr[i]);
+				tagsArray.push(countTags($scope.postsData, arr[i]));
+			}
+			return tagsArray;
+		};
+
+
 		// console.log($scope.postsData.posts);
 		// console.log($scope.findAccurancies(postsData, 'author', 'Ilan Cohen' ));
 

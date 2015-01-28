@@ -91,9 +91,9 @@
 				<h4><small class="glyphicon glyphicon-tag"></small> Category</h4>
 				<div class="list-group">
 
-					<a href="#" class="list-group-item" ng-repeat = "tag in tags">
-						<span class="badge">6</span>
-						{{tag}}
+					<a href="#" class="list-group-item" ng-repeat = "tag in tagsA">
+						<span class="badge">{{tag.count}}</span>
+						{{tag.tag}}
 					</a>
 
 					<!-- <a href="#" class="list-group-item">
