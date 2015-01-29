@@ -12,6 +12,10 @@
 				templateUrl : 'app/posts/posts.html',
 				controller : 'postCtrl'
 			})
+			.when('/post/:title?', {
+				templateUrl : 'app/post/post.view.html',
+				controller : 'postCtrl'
+		})
 			.when('/admin' , {
 				templateUrl : 'app/admin/admin.html',
 				controller : 'MainCtrl'

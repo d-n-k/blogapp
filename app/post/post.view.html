@@ -1,0 +1,33 @@
+			<!-- Blog Post Content Column -->
+			<section ng-controller="mainCtrl">
+
+				<!-- Begin Post -->
+				<article>
+					<header>
+						<h1 class="page-header">{{post.title}}</h1>
+
+						<p>
+							<small class="glyphicon glyphicon-user"></small>
+							by <a href="#">{{post.author}}</a>
+						</p>
+						<p>
+							<small class="glyphicon glyphicon-time"></small>
+							Posted on {{post.date | date:'mediumDate'}}
+						</p>
+						<p>
+							<b>Tags:&nbsp;</b>
+							<span ng-repeat="tag in post.tags">
+								<a href="#" class="btn btn-default btn-xs" role="button">{{tag}}</a>
+							</span>
+						</p>
+					</header>
+					<hr>
+
+					<figure>
+						<img class="img-responsive" src="http://placehold.it/900x300"
+							alt="">
+					</figure>
+					<hr>
+
+					<!-- Post Content -->
+					<ng-include	src="post.source"></ng-include>

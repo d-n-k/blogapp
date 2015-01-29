@@ -2,8 +2,8 @@
 	'use strict';
 	var app = angular.module('BlogApp');
 
-	app.controller('mainCtrl', ['$scope', 'postsData', '$routeParams','$location',
-		function($scope, postsData, $routeParams, $location){
+	app.controller('mainCtrl', ['$scope', 'postsData', '$routeParams','$location', 'utils',
+		function($scope, postsData, $routeParams, $location, utils) {
 
 		console.log($routeParams.page);
 		console.log($location.path());
@@ -23,9 +23,21 @@
 				$scope.ttt = _.pluck(findOccurences(data.posts, 'tags'), 'key');
 				$scope.tags = _.union($scope.ttt[0].split(','), $scope.ttt[1].split(','), $scope.ttt[2].split(','));
 				// console.log(countTags($scope.postsData,'JavaScript'));
-				console.log($scope.ttt);
 				$scope.tagsA = tagsArray($scope.tags);
-				console.log($scope.tagsA);
+
+
+				for(var post in $scope.postsData){
+
+					if ($scope.postsData.hasOwnProperty(post)){
+
+						var postTitle = utils.cleanTitle($scope.postsData[post].title);
+
+						if(postTitle === $routeParams.title){
+
+							$scope.post = $scope.postsData[post];
+						}
+					}
+			}
 			})
 			.error(function(data, status){
 
@@ -55,7 +67,8 @@
 			}
 			return tagsArray;
 		};
-
+		console.log(utils);
+		$scope.cleanTitle = utils.cleanTitle;
 
 		// console.log($scope.postsData.posts);
 		// console.log($scope.findAccurancies(postsData, 'author', 'Ilan Cohen' ));
