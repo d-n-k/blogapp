@@ -1,6 +1,6 @@
 <h1 class="page-header">All Posts</h1>
-<section ng-repeat = "post in postsData | limitFrom: pFilter">
-	<!-- Begin Post -->
+<section ng-repeat = "post in postsData | filter: currentFilter | limitFrom: pFilter">
+	<!-- Begin Post limit From: pFilter" -->
 	<article>
 		<header>
 			<h2>

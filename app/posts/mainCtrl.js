@@ -16,6 +16,7 @@
 		$scope.postsData = [];
 
 
+
 		postsData
 			.success(function(data, status) {
 				$scope.postsData = data.posts;

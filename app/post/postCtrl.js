@@ -7,9 +7,10 @@
 
 		console.log($routeParams.page);
 		console.log($location.path());
-		console.log($location.search());
+		console.log($location.search().category);
 
-
+		// $scope.currentFilter = 'Alex Ilyaev';
+		$scope.currentFilter = $location.search().category;
 		$scope.classActive = ($location.path().indexOf('posts')>-1);
 		console.log($scope.classActive);
 		var init = function() {

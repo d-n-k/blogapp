@@ -82,7 +82,7 @@
 				<h3>Filter Posts</h3>
 
 				<div class="list-group">
-					<a href="#" class="list-group-item active">
+					<a href="#/posts" class="list-group-item active">
 						<span class="badge">8</span>
 						Show All Posts
 					</a>
@@ -91,7 +91,7 @@
 				<h4><small class="glyphicon glyphicon-tag"></small> Category</h4>
 				<div class="list-group">
 
-					<a href="#" class="list-group-item" ng-repeat = "tag in tagsA">
+					<a href="#/posts?category={{tag.tag}}"" class="list-group-item" ng-repeat = "tag in tagsA">
 						<span class="badge">{{tag.count}}</span>
 						{{tag.tag}}
 					</a>
@@ -100,18 +100,10 @@
 
 				<h4><small class="glyphicon glyphicon-user"></small> Author</h4>
 				<div class="list-group">
-					<a href="#" class="list-group-item" ng-repeat="author in authors | orderBy:'count':true">
+					<a href="#/posts?category={{author.key}}" class="list-group-item" ng-repeat="author in authors | orderBy:'count':true">
 						<span class="badge">{{author.count}}</span>
 						{{author.key}}
 					</a>
-					<!-- <a href="#" class="list-group-item">
-						<span class="badge">2</span>
-						Alex Ilyaev
-					</a>
-					<a href="#" class="list-group-item">
-						<span class="badge">2</span>
-						Amit Choukroun
-					</a> -->
 				</div>
 
 				<h4><small class="glyphicon glyphicon-time"></small> Month</h4>
