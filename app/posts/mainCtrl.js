@@ -2,54 +2,79 @@
 	'use strict';
 	var app = angular.module('BlogApp');
 
-	app.controller('mainCtrl', ['$scope', 'postsData', '$routeParams','$location', 'utils',
-		function($scope, postsData, $routeParams, $location, utils) {
-
-		console.log($routeParams.page);
-		console.log($location.path());
-		console.log($location.search());
+	app.controller('mainCtrl', ['$scope', 'postsData', '$routeParams','$location', 'utils','_',
+		function($scope, postsData, $routeParams, $location, utils, _) {
 
 		$scope.fpage = ($routeParams.page);
 		$scope.classActive = ($location.path().indexOf('posts')>-1);
 		console.log($scope.classActive);
-
+		// $scope.sum = [];
 		$scope.postsData = [];
+		$scope.cleanTitle = utils.cleanTitle;
 
+		$scope.posts = postsData.get().then(function (data) {
+    		$scope.posts = data.data.posts;
+    		$scope.postsData = data.data.posts;
+			$scope.authors = findOccurences(data.data.posts, 'author');
+			$scope.ttt = _.pluck(findOccurences(data.data.posts, 'tags'), 'key');
+			$scope.tags = _.union($scope.ttt[0].split(','), $scope.ttt[1].split(','), $scope.ttt[2].split(','));
+			// console.log(countTags($scope.postsData,'JavaScript'));
+			$scope.tagsA = tagsArray($scope.tags);
+			console.log($scope.authors[0].count);
+			$scope.sumPosts = sumPosts($scope.authors);
 
+			for(var post in $scope.postsData){
 
-		postsData
-			.success(function(data, status) {
-				$scope.postsData = data.posts;
-				$scope.authors = findOccurences(data.posts, 'author');
-				$scope.ttt = _.pluck(findOccurences(data.posts, 'tags'), 'key');
-				$scope.tags = _.union($scope.ttt[0].split(','), $scope.ttt[1].split(','), $scope.ttt[2].split(','));
-				// console.log(countTags($scope.postsData,'JavaScript'));
-				$scope.tagsA = tagsArray($scope.tags);
+				if ($scope.postsData.hasOwnProperty(post)){
 
+					var postTitle = utils.cleanTitle($scope.postsData[post].title);
 
-				for(var post in $scope.postsData){
+					if(postTitle === $routeParams.title){
 
-					if ($scope.postsData.hasOwnProperty(post)){
-
-						var postTitle = utils.cleanTitle($scope.postsData[post].title);
-
-						if(postTitle === $routeParams.title){
-
-							$scope.post = $scope.postsData[post];
-						}
+						$scope.post = $scope.postsData[post];
 					}
+				}
 			}
-			})
-			.error(function(data, status){
+			console.log($scope.postsData);
+		});
 
-				console.error(status, data);
-			});
+
+		// postsData
+		// 	.success(function(data, status) {
+		// 		$scope.postsData = data.posts;
+		// 		$scope.authors = findOccurences(data.posts, 'author');
+		// 		$scope.ttt = _.pluck(findOccurences(data.posts, 'tags'), 'key');
+		// 		$scope.tags = _.union($scope.ttt[0].split(','), $scope.ttt[1].split(','), $scope.ttt[2].split(','));
+		// 		// console.log(countTags($scope.postsData,'JavaScript'));
+		// 		$scope.tagsA = tagsArray($scope.tags);
+		// 		console.log($scope.authors[0].count);
+		// 		$scope.sumPosts = sumPosts($scope.authors);
+
+		// 		for(var post in $scope.postsData){
+
+		// 			if ($scope.postsData.hasOwnProperty(post)){
+
+		// 				var postTitle = utils.cleanTitle($scope.postsData[post].title);
+
+		// 				if(postTitle === $routeParams.title){
+
+		// 					$scope.post = $scope.postsData[post];
+		// 				}
+		// 			}
+		// 		}
+		// 		console.log($scope.postsData);
+		// 	})
+		// 	.error(function(data, status){
+
+		// 		console.error(status, data);
+		// 	});
 		var findOccurences = function (posts, key) {
 			return _.map(_.countBy(posts, key), function (val, key) {
 				return {key: key, count: val};
 			});
 
 		};
+
 		var countTags = function (arr, tag) {
 			var count = 0;
 			var tags = {};
@@ -68,8 +93,16 @@
 			}
 			return tagsArray;
 		};
-		console.log(utils);
-		$scope.cleanTitle = utils.cleanTitle;
+
+		var sumPosts = function(arr) {
+			var sum = 0;
+			for (var i = 0; i < arr.length; i++) {
+				sum = sum + arr[i].count ;
+
+			}
+			return sum;
+		};
+
 
 		// console.log($scope.postsData.posts);
 		// console.log($scope.findAccurancies(postsData, 'author', 'Ilan Cohen' ));

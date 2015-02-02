@@ -4,6 +4,15 @@
 
 	app.factory('postsData', ['$http',function($http){
 
-		return $http.get('data/posts.json');
+		var promise = $http.get('data/posts.json')
+	    	.error(function (data, status) {
+	        	console.error(status, data);
+	    	});
+
+		return {
+	    	get: function () {
+	        	return promise;
+	    	}
+		};
 	}]);
 }());

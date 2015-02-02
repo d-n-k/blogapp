@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 
-	var app = angular.module('BlogApp', ['ngRoute']);
+	var app = angular.module('BlogApp', ['ngRoute','underscore']);
 
 	app.config(['$routeProvider' , function($routeProvider){
 		$routeProvider
