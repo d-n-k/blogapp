@@ -2,8 +2,8 @@
 	'use strict';
 	var app = angular.module('BlogApp');
 
-	app.controller('postCtrl', ['$scope', 'postsData', '$routeParams','$location', 'utils',
-		function($scope, postsData, $routeParams, $location, utils) {
+	app.controller('postCtrl', ['$scope', 'postsData', '$routeParams','$location', 'utils','$sanitize','$http',
+		function($scope, postsData, $routeParams, $location, utils, $sanitize, $http) {
 
 		$scope.currentFilter = $location.search().category;
 
@@ -30,11 +30,37 @@
 
 		};
 		init();
+
+		postsData.get().then(function (data) {
+			console.log(data);
+    		$scope.posts = data.posts;
+    		$scope.postsData = data.posts;
+			
+			for(var post in $scope.postsData){
+
+				if ($scope.postsData.hasOwnProperty(post)){
+
+					var postTitle = utils.cleanTitle($scope.postsData[post].title);
+
+					if(postTitle === $routeParams.title){
+
+						$scope.post = $scope.postsData[post];
+						
+						$http.get($scope.post.htmlPath)
+						    .success(function (data) {
+						        $scope.postHtml = $sanitize(data);
+						    });
+					}
+				}
+			}
+			console.log($scope.postsData);
+		});
 		$scope.cleanTitle = utils.cleanTitle;
 		console.log($scope.pFilter);
 		console.log($scope.currpage);
 		console.log($scope.fpage);
 
+		
 
 
 	    /*$scope.toggleEditEmployee = function(employee){

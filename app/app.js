@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 
-	var app = angular.module('BlogApp', ['ngRoute','underscore']);
+	var app = angular.module('BlogApp', ['ngRoute','underscore','ngSanitize']);
 
 	app.config(['$routeProvider' , function($routeProvider){
 		$routeProvider
@@ -17,7 +17,7 @@
 				controller : 'postCtrl'
 		})
 			.when('/admin' , {
-				templateUrl : 'app/admin/admin.html',
+				templateUrl : 'app/admin/admin.view.html',
 				controller : 'MainCtrl'
 			})
 			.otherwise({

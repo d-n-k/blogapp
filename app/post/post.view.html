@@ -23,11 +23,8 @@
 					</header>
 					<hr>
 
-					<figure>
-						<img class="img-responsive" ng-src="{{post.image}}
-							alt="">
-					</figure>
-					<hr>
+					
 
 					<!-- Post Content -->
-					<ng-include	src="post.source"></ng-include>
+					<!-- <ng-include	src="post.htmlPath"></ng-include> -->
+					<div ng-bind-html="postHtml"></div>

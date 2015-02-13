@@ -2,12 +2,21 @@
 	'use strict';
 	var app = angular.module('BlogApp');
 
-	app.factory('postsData', ['$http',function($http){
+	app.factory('postsData', ['$http','$q',function($http, $q){
 
-		var promise = $http.get('data/posts.json')
+		var dataCache = {},
+		defer = $q.defer(),
+		promise = defer.promise
+
+		$http.get('data/posts.json')
+			.success(function (data, status) {
+				dataCache.posts = data.posts
+				defer.resolve(dataCache);
+			})
 	    	.error(function (data, status) {
 	        	console.error(status, data);
 	    	});
+	    
 
 		return {
 	    	get: function () {

@@ -12,11 +12,12 @@
 		$scope.postsData = [];
 		$scope.cleanTitle = utils.cleanTitle;
 
-		$scope.posts = postsData.get().then(function (data) {
-    		$scope.posts = data.data.posts;
-    		$scope.postsData = data.data.posts;
-			$scope.authors = findOccurences(data.data.posts, 'author');
-			$scope.ttt = _.pluck(findOccurences(data.data.posts, 'tags'), 'key');
+		postsData.get().then(function (data) {
+			console.log(data);
+    		$scope.posts = data.posts;
+    		$scope.postsData = data.posts;
+			$scope.authors = findOccurences(data.posts, 'author');
+			$scope.ttt = _.pluck(findOccurences(data.posts, 'tags'), 'key');
 			$scope.tags = _.union($scope.ttt[0].split(','), $scope.ttt[1].split(','), $scope.ttt[2].split(','));
 			// console.log(countTags($scope.postsData,'JavaScript'));
 			$scope.tagsA = tagsArray($scope.tags);
@@ -32,42 +33,14 @@
 					if(postTitle === $routeParams.title){
 
 						$scope.post = $scope.postsData[post];
+
+						
 					}
 				}
 			}
 			console.log($scope.postsData);
 		});
-
-
-		// postsData
-		// 	.success(function(data, status) {
-		// 		$scope.postsData = data.posts;
-		// 		$scope.authors = findOccurences(data.posts, 'author');
-		// 		$scope.ttt = _.pluck(findOccurences(data.posts, 'tags'), 'key');
-		// 		$scope.tags = _.union($scope.ttt[0].split(','), $scope.ttt[1].split(','), $scope.ttt[2].split(','));
-		// 		// console.log(countTags($scope.postsData,'JavaScript'));
-		// 		$scope.tagsA = tagsArray($scope.tags);
-		// 		console.log($scope.authors[0].count);
-		// 		$scope.sumPosts = sumPosts($scope.authors);
-
-		// 		for(var post in $scope.postsData){
-
-		// 			if ($scope.postsData.hasOwnProperty(post)){
-
-		// 				var postTitle = utils.cleanTitle($scope.postsData[post].title);
-
-		// 				if(postTitle === $routeParams.title){
-
-		// 					$scope.post = $scope.postsData[post];
-		// 				}
-		// 			}
-		// 		}
-		// 		console.log($scope.postsData);
-		// 	})
-		// 	.error(function(data, status){
-
-		// 		console.error(status, data);
-		// 	});
+	
 		var findOccurences = function (posts, key) {
 			return _.map(_.countBy(posts, key), function (val, key) {
 				return {key: key, count: val};
