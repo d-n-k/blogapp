@@ -2,8 +2,8 @@
 	'use strict';
 	var app = angular.module('BlogApp');
 
-	app.controller('mainCtrl', ['$scope', 'postsData', '$routeParams','$location', 'utils','_',
-		function($scope, postsData, $routeParams, $location, utils, _) {
+	app.controller('mainCtrl', ['$scope', 'postsData', '$routeParams','$location', 'utils', '_', 'activeNav',
+		function($scope, postsData, $routeParams, $location, utils, _, activeNav) {
 
 		$scope.fpage = ($routeParams.page);
 		$scope.classActive = ($location.path().indexOf('posts')>-1);
@@ -11,6 +11,10 @@
 		// $scope.sum = [];
 		$scope.postsData = [];
 		$scope.cleanTitle = utils.cleanTitle;
+		var tab = $location.path().slice(1);
+		activeNav.set(tab);
+		$scope.activeTab = activeNav.get();
+
 
 		postsData.get().then(function (data) {
 			console.log(data);

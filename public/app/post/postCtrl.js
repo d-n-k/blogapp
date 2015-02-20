@@ -2,10 +2,13 @@
 	'use strict';
 	var app = angular.module('BlogApp');
 
-	app.controller('postCtrl', ['$scope', 'postsData', '$routeParams','$location', 'utils','$sanitize','$http',
-		function($scope, postsData, $routeParams, $location, utils, $sanitize, $http) {
+	app.controller('postCtrl', ['$scope', 'postsData', '$routeParams','$location', 'utils','$sanitize','$http', 'activeNav',
+		function($scope, postsData, $routeParams, $location, utils, $sanitize, $http, activeNav) {
 
 		$scope.currentFilter = $location.search().category;
+
+		var tab = $location.path().slice(1);
+		activeNav.set(tab);
 
 		var init = function() {
 			$scope.pFilter = 2;

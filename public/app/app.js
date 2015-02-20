@@ -18,7 +18,7 @@
 		})
 			.when('/admin' , {
 				templateUrl : 'app/admin/admin.view.html',
-				controller : 'MainCtrl'
+				controller : 'adminCtrl'
 			})
 			.otherwise({
 				redirectTo : '/'

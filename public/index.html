@@ -82,7 +82,7 @@
 				<h3>Filter Posts</h3>
 
 				<div class="list-group">
-					<a href="#/posts" class="list-group-item active">
+					<a href="#/{{activeTab.active}}" class="list-group-item active">
 						<span class="badge">{{sumPosts}}</span>
 						Show All Posts
 					</a>
@@ -91,7 +91,7 @@
 				<h4><small class="glyphicon glyphicon-tag"></small> Category</h4>
 				<div class="list-group">
 
-					<a href="#/posts?category={{tag.tag}}"" class="list-group-item" ng-repeat = "tag in tagsA">
+					<a href="#/{{activeTab.active}}?category={{tag.tag}}" class="list-group-item" ng-repeat = "tag in tagsA">
 						<span class="badge">{{tag.count}}</span>
 						{{tag.tag}}
 					</a>
@@ -100,7 +100,7 @@
 
 				<h4><small class="glyphicon glyphicon-user"></small> Author</h4>
 				<div class="list-group">
-					<a href="#/posts?category={{author.key}}" class="list-group-item" ng-repeat="author in authors | orderBy:'count':true">
+					<a href="#/{{activeTab.active}}?category={{author.key}}" class="list-group-item" ng-repeat="author in authors | orderBy:'count':true">
 						<span class="badge">{{author.count}}</span>
 						{{author.key}}
 					</a>
@@ -134,6 +134,7 @@
 
 
 	</div>
+	<br>
 
 		<!-- Footer -->
 	<footer>
@@ -166,6 +167,8 @@
 	<script src="app/post/post.service.js"></script>
 	<script src="app/posts/posts.service.js"></script>
 	<script src="app/posts/posts.filter.js"></script>
+	<script src="app/admin/admin.controller.js"></script>
+	<script src="app/admin/edit.controller.js"></script>
 
 </body>
 </html>
