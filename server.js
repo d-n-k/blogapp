@@ -38,6 +38,8 @@ app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
+
+
 // Handle POST request to save a new user data
 app.post('/posts', function (req, res) {
 	console.log(req.method, req.path, req.body);
@@ -54,18 +56,24 @@ app.post('/posts', function (req, res) {
 		// Add the new user to the users data array
 		data = JSON.parse(data);
 		var posts = data.posts;
+		var exists = false
 		//Find the needed post
 		for (var i = 0; i < posts.length; i++) {
 			if(posts[i].title === req.body.title) {
+				exists = true;
 				for (var key in newData ) {
 					posts[i][key] = newData[key];
 				};
 				console.log(data[i]);
-			}
+			} 
 		};
 
-		// data.posts.push(req.body);
+		if(!exists) {
+			//Validate Data
 
+
+			posts.push(newData);
+		}
 		//Write the new data back to the file
 		fs.writeFile(postsPath, JSON.stringify(data), function () {
 			// Status 201 means "Request fulfilled, and a resource was created"

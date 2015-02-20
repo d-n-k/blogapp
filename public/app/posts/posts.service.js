@@ -17,7 +17,7 @@
 	    	.error(function (data, status) {
 	        	console.error(status, data);
 	    	});
-	    var title = 'Grunt - Intro';
+	    var title = 'Aliens not real';
 	    var postObj = {
 	    	description: '*** Testing***'
 	    };
